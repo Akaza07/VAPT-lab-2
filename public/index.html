@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VAPT Learning Lab | Cyber Training</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Using Google Fonts for a sleek look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="dark-mode">
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="logo"></div>
+                <h1>VAPT Lab</h1>
+            </div>
+            
+            <div class="user-profile">
+                <div class="avatar" id="user-avatar">🧑‍💻</div>
+                <div class="user-info">
+                    <h3 id="username-display">Hacker_01</h3>
+                    <div class="level">Level <span id="user-level">1</span>: <span id="user-rank">Novice</span></div>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="xp-bar" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <nav class="vuln-nav">
+                <h3>Vulnerabilities</h3>
+                <input type="text" id="search-vulns" placeholder="Search modules..." />
+                <ul id="vuln-list"></ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button id="theme-toggle">☀️ Light Mode</button>
+                <button id="reset-btn" class="danger">Reset All State</button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="content">
+            <header class="topbar">
+                <div class="topbar-left">
+                    <h2 id="current-module-title">Dashboard</h2>
+                    <span id="current-module-category" class="badge hidden"></span>
+                    <span id="current-module-difficulty" class="badge hidden"></span>
+                </div>
+                <div class="topbar-right">
+                    <button id="leaderboard-btn" class="icon-btn">🏆 Leaderboard</button>
+                    <button class="icon-btn tooltip" aria-label="Documentation">📚</button>
+                </div>
+            </header>
+
+            <div class="workspace" id="workspace">
+                
+                <!-- Dashboard Default View -->
+                <div id="dashboard-view" class="view-panel active">
+                    <div class="welcome-card glass">
+                        <h2>Welcome to the VAPT Learning Lab</h2>
+                        <p>Select a vulnerability module from the sidebar to begin your training. Remember, use these skills ethically and responsively.</p>
+                        
+                        <div class="stats-grid">
+                            <div class="stat-box">
+                                <h4>Badges Earned</h4>
+                                <div class="stat-value" id="stat-badges">0</div>
+                            </div>
+                            <div class="stat-box">
+                                <h4>Modules Completed</h4>
+                                <div class="stat-value" id="stat-completed">0/40+</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 style="margin-bottom: 1rem; margin-top: 1rem;">Select a Vulnerability</h3>
+                    <div id="vuln-tiles-grid" class="tiles-grid">
+                        <!-- Dynamically populated via script.js -->
+                    </div>
+                </div>
+
+                <!-- Learning Module View -->
+                <div id="module-view" class="view-panel">
+                    <button id="back-to-home-btn" class="icon-btn" style="margin-bottom: 1rem; display: inline-flex; align-items: center; gap: 0.5rem; background: var(--bg-panel); border: 1px solid var(--border-color); color: var(--text-main);">
+                        ⬅️ Back to Dashboard
+                    </button>
+                    <div class="module-layout">
+                        <!-- Left pane: Theory and Instructions -->
+                        <div class="module-theory glass">
+                            <h3>Theory</h3>
+                            <p id="theory-text"></p>
+                            
+                            <hr/>
+                            
+                            <h3>The Exploit</h3>
+                            <p id="exploit-text"></p>
+                            
+                            <hr/>
+
+                            <h3>Mitigations</h3>
+                            <ul id="mitigations-list"></ul>
+                        </div>
+
+                        <!-- Right pane: The Vulnerable Sandbox -->
+                        <div class="module-sandbox class">
+                            <div class="sandbox-header">
+                                <h3>Target Application</h3>
+                                <div class="sandbox-controls">
+                                    <button id="hint-btn">Show Hint</button>
+                                </div>
+                            </div>
+                            
+                            <div id="hint-box" class="hint-box hidden">
+                                <strong>Hint:</strong> <span id="hint-text"></span>
+                            </div>
+                            
+                            <div class="sandbox-body" id="sandbox-container">
+                                <!-- Dynamically injected form/ui goes here -->
+                                <div class="placeholder">
+                                    <p>Loading application context...</p>
+                                </div>
+                            </div>
+
+                            <div class="terminal-view glass-dark">
+                                <div class="terminal-header">
+                                    <span>Console Output</span>
+                                </div>
+                                <div class="terminal-body" id="terminal-output">
+                                    <div class="log-line system">Ready.</div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+        
+        <!-- Confetti Canvas -->
+        <canvas id="confetti-canvas"></canvas>
+    </div>
+
+    <!-- Leaderboard Modal -->
+    <div id="leaderboard-modal" class="modal">
+        <div class="modal-content glass">
+            <span class="close-btn">&times;</span>
+            <h2>Top Hackers</h2>
+            <ul id="leaderboard-list">
+                <!-- Populated via JS -->
+            </ul>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
