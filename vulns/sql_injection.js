@@ -75,6 +75,8 @@ module.exports = {
     theory: "SQL injection attacks occur when maliciously crafted inputs are submitted by an attacker, causing an application to perform an unintended action on the database. It allows attackers to spoof identity, tamper with existing data, or orchestrate administrative operations.",
     exploit: "Try logging in bypassing the password check. Submit Email: user@email.com and Password: ' or 1=1--",
     hint: "The database uses single quotes (') to interpret strings. Inject an apostrophe followed by an OR condition that evaluates to true, ending with a SQL comment (--).",
+    whatToSolve: "Send a POST request to /api/vulns/sqli-auth/login with body: { email: 'user@email.com', password: \"' OR 1=1--\", level: 'low' }. The vulnerable SQL query becomes: SELECT * FROM users WHERE username = 'user@email.com' AND password = '' OR 1=1--' which always evaluates to true, bypassing authentication completely.",
+    expectedOutput: "{ success: true, message: \"Welcome back, we successfully bypassed authentication! flag{sqli_auth_bypass}\", user: { id: 1, username: 'admin@bank.com', ... } }",
     mitigations: [
         "Use Parameterized Statements (Prepared Statements).",
         "Adopt Object Relational Mapping (ORM) frameworks correctly.",

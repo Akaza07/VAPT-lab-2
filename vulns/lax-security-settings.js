@@ -47,6 +47,8 @@ module.exports = {
     theory: "Security Misconfiguration or Lax Settings is the most commonly seen issue, where default accounts, outdated software, or unprotected files are deployed to production.",
     exploit: "Attempt to access the default administration console with default credentials.",
     hint: "Send `admin:admin` or `admin:password` to the endpoint.",
+    whatToSolve: "Send a POST request to /api/vulns/lax-security-settings/execute with body: { payload: 'admin:admin', level: 'low' }. The server still has the default credentials in place (never changed from factory defaults) — submitting 'admin:admin', 'admin:password', or 'default' authenticates you with full admin access.",
+    expectedOutput: "{ success: true, message: 'Exploit successful! Here is your flag: flag{lax-security-settings_success}' }",
     mitigations: ["Automate configuration hardening and remove unused features.","Change all default credentials immediately."],
     router: router
 };

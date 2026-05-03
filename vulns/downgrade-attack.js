@@ -47,6 +47,8 @@ module.exports = {
     theory: "Attackers force a system to abandon a high-security mode and operate in a fallback, less secure mode, such as downgrading from TLS 1.3 to TLS 1.0 or plaintext.",
     exploit: "Send a connection request explicitly identifying that high-level cryptography is not supported by your client.",
     hint: "Send the payload 'TLSv1.0-Only' or 'SSLv3' to bypass modern checks.",
+    whatToSolve: "Send a POST request to /api/vulns/downgrade-attack/execute with body: { payload: 'Client-Hello: TLSv1.0 downgrade only', level: 'low' }. The payload simulates a TLS ClientHello advertising only weak/legacy protocol support — including 'SSL', 'TLSv1.0', or 'downgrade' forces the handshake to fall back to an insecure cipher suite.",
+    expectedOutput: "{ success: true, message: 'Exploit successful! Here is your flag: flag{downgrade-attack_success}' }",
     mitigations: ["Disable obsolete protocols entirely on the host.","Enforce HSTS (HTTP Strict Transport Security)."],
     router: router
 };

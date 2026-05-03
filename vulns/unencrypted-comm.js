@@ -47,6 +47,8 @@ module.exports = {
     theory: "Sending sensitive data (passwords, tokens, PII) over unencrypted channels like HTTP or unsecure FTP means the data is readable in plain text by anyone monitoring the network.",
     exploit: "Capture network traffic to extract plaintext sensitive information.",
     hint: "Provide the phrase 'Wireshark Export: AdminPassword123' to simulate sniffing.",
+    whatToSolve: "Send a POST request to /api/vulns/unencrypted-comm/execute with body: { payload: 'Wireshark Export: Sniffed Password=AdminPassword123', level: 'low' }. The application transmits credentials over plain HTTP — using a network sniffer like Wireshark you capture the unencrypted traffic. Include 'Sniffed' or 'Password' in your payload to simulate extracting credentials from captured traffic.",
+    expectedOutput: "{ success: true, message: 'Exploit successful! Here is your flag: flag{unencrypted-comm_success}' }",
     mitigations: ["Enforce TLS encryption intrinsically.","Never allow fallback endpoints without TLS active."],
     router: router
 };

@@ -47,6 +47,8 @@ module.exports = {
     theory: "DOM-based Cross-Site Scripting occurs within the client's browser. The malicious payload is never sent to the server; instead, the frontend JavaScript consumes it unsafely (e.g. from `window.location.hash`).",
     exploit: "Provide a payload utilizing the DOM fragment # bypassing server evaluation.",
     hint: "Send `#<img src=x onerror=alert(1)>`.",
+    whatToSolve: "Send a POST request to /api/vulns/dom-xss/execute with body: { payload: '#<img src=x onerror=alert(1)>', level: 'low' }. The payload targets the URL fragment (#) which is processed entirely client-side — the server validates the pattern to simulate detection of a DOM-based XSS attack that never touches the server.",
+    expectedOutput: "{ success: true, message: 'Exploit successful! Here is your flag: flag{dom-xss_success}' }",
     mitigations: ["Avoid rendering raw elements from sources like `location.hash` or `document.referrer`.","Use `textContent` instead of `innerHTML`."],
     router: router
 };

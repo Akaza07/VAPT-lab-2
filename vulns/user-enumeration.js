@@ -47,6 +47,8 @@ module.exports = {
     theory: "Differences in application responses (e.g., 'User not found' vs 'Invalid password') or response times allow an attacker to guess valid usernames.",
     exploit: "Observe backend responses to identify a valid user id.",
     hint: "Send 'Guess: admin' expecting a 'Password invalid' specific response.",
+    whatToSolve: "Send a POST request to /api/vulns/user-enumeration/execute with body: { payload: 'Guess: admin', level: 'low' }. The login endpoint returns different error messages for 'user not found' vs 'wrong password' — this difference reveals which usernames are valid. Sending 'Guess: admin' confirms that the username 'admin' exists, which can then be used for a targeted brute-force attack.",
+    expectedOutput: "{ success: true, message: 'Exploit successful! Here is your flag: flag{user-enumeration_success}' }",
     mitigations: ["Use generic error messaging like 'Login failed'.","Implement strict rate-limiting on authentication endpoints."],
     router: router
 };

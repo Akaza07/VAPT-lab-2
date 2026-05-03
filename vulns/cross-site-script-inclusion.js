@@ -47,6 +47,8 @@ module.exports = {
     theory: "XSSI leaks sensitive data when an attacker uses the `<script>` tag to dynamically load a confidential API endpoint from a cross-origin site, bypassing Same-Origin Policy since scripts inherently bypass SOP.",
     exploit: "Request an authenticated JSON endpoint via a script element.",
     hint: "Send `<script src='https://bank.com/api/userINFO'></script>`.",
+    whatToSolve: "Send a POST request to /api/vulns/cross-site-script-inclusion/execute with body: { payload: \"<script src='https://bank.com/api/userINFO'></script>\", level: 'low' }. By loading a JSON endpoint via a <script> tag from a cross-origin attacker page, the browser executes the JSON response as JavaScript — the server detects the '<script src=...userINFO' pattern to confirm the attack.",
+    expectedOutput: "{ success: true, message: 'Exploit successful! Here is your flag: flag{cross-site-script-inclusion_success}' }",
     mitigations: ["Use unguessable CSRF-style tokens for APIs.","Prefix JSON files with parser-breaking junk like `)]}',\\n`."],
     router: router
 };

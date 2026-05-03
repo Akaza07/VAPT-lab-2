@@ -47,6 +47,8 @@ module.exports = {
     theory: "Storing passwords in plain text or using weak hashing algorithms (like MD5/SHA1) allows attackers database breaches to quickly become full account takeovers.",
     exploit: "Submit a reverse hash dictionary attack parameter to instantly crack a weak hash.",
     hint: "Provide an MD5 hash of 'password123': `cbfa20...` implying a rainbow table lookup.",
+    whatToSolve: "Send a POST request to /api/vulns/password-mismanagement/execute with body: { payload: 'rainbow table match crack MD5', level: 'low' }. The database stores passwords as unsalted MD5 hashes — using a rainbow table lets you instantly find the plaintext for any hash. Include 'rainbow', 'match', or 'crack' in your payload to simulate a successful dictionary attack.",
+    expectedOutput: "{ success: true, message: 'Exploit successful! Here is your flag: flag{password-mismanagement_success}' }",
     mitigations: ["Use strong iterative functions like Argon2, bcrypt, or scrypt.","Salt all passwords randomly."],
     router: router
 };

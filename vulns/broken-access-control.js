@@ -47,6 +47,8 @@ module.exports = {
     theory: "Broken Access Control allows attackers to bypass authorization, viewing or modifying data they shouldn't access—such as accessing another user's profile ID directly in a URL.",
     exploit: "Modify the account ID in the payload to access another user's restricted information.",
     hint: "Try sending an ID parameter as 0 or 1 representing an admin, instead of your standard ID.",
+    whatToSolve: "Send a POST request to /api/vulns/broken-access-control/execute with body: { payload: '/api/profile?id=1', level: 'low' }. By changing the user ID to 1 (the admin account), you bypass authorization checks and access data that should be restricted to you.",
+    expectedOutput: "{ success: true, message: 'Exploit successful! Here is your flag: flag{broken-access-control_success}' }",
     mitigations: ["Implement role-based access control (RBAC).","Verify ownership mathematically on the backend."],
     router: router
 };

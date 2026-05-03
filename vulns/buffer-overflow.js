@@ -47,6 +47,8 @@ module.exports = {
     theory: "A buffer overflow anomaly happens when a program writes more data to a block of memory (buffer) than it was allocated to hold, allowing contiguous memory overwrites.",
     exploit: "Send an excessively long string to overwrite the instruction pointer.",
     hint: "Send more than 256 'A' characters to execute the application crash.",
+    whatToSolve: "Send a POST request to /api/vulns/buffer-overflow/execute with body: { payload: 'AAAAAAAAAA...' (200 or more 'A' characters), level: 'low' }. The server simulates a fixed-size buffer — writing more data than it can hold causes an overflow. You can quickly generate this with: 'A'.repeat(200).",
+    expectedOutput: "{ success: true, message: 'Exploit successful! Here is your flag: flag{buffer-overflow_success}' }",
     mitigations: ["Use bounds checking and modern memory-safe languages.","Enable ASLR and DEP flags."],
     router: router
 };

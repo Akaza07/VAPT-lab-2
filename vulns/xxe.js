@@ -47,6 +47,8 @@ module.exports = {
     theory: "XXE occurs when weakly configured XML parsers process 'external entities' referenced within a Document Type Definition (DTD). Attackers can exfiltrate local files like /etc/passwd.",
     exploit: "Form an XML DOCTYPE declaring a SYSTEM entity pointing to /etc/passwd.",
     hint: "Provide an entity `<!ENTITY xxe SYSTEM \"file:///etc/passwd\">`.",
+    whatToSolve: "Send a POST request to /api/vulns/xxe/execute with body: { payload: '<!DOCTYPE foo [<!ENTITY xxe SYSTEM \"file:///etc/passwd\">]><foo>&xxe;</foo>', level: 'low' }. The XML parser processes the SYSTEM entity and reads the local file — the SYSTEM keyword in the payload confirms the exploit.",
+    expectedOutput: "{ success: true, message: 'Exploit successful! Here is your flag: flag{xxe_success}' }",
     mitigations: ["Disable External Entity Resolution (DTD) completely in the XML parser.","Use JSON or simpler data formats instead."],
     router: router
 };

@@ -47,6 +47,8 @@ module.exports = {
     theory: "Reflected Cross-Site Scripting immediately echoes unsanitized user input back into the page. The attacker must trick a victim into clicking a crafted URL containing the payload.",
     exploit: "Send a payload via a GET query parameter that reflects directly into the HTML response.",
     hint: "Send `?search=<script>alert(1)</script>`.",
+    whatToSolve: "Send a POST request to /api/vulns/reflected-xss/execute with body: { payload: 'search=<script>alert(1)</script>', level: 'low' }. The server echoes the raw input without sanitizing it, matching the XSS pattern and triggering the exploit.",
+    expectedOutput: "{ success: true, message: 'Exploit successful! Here is your flag: flag{reflected-xss_success}' }",
     mitigations: ["Implement context-aware output encoding (HTML Entity Encoding).","Deploy a strict Content-Security-Policy."],
     router: router
 };

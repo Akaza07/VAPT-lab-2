@@ -47,6 +47,8 @@ module.exports = {
     theory: "The application unintentionally reveals sensitive data, such as stack traces, framework versions, or configuration details, aiding attackers in further exploitation.",
     exploit: "Trigger a severe syntax error to force the application to drop an unhandled stack trace.",
     hint: "Send an invalid JSON structure like `{invalid_json: ` to break the parser.",
+    whatToSolve: "Send a POST request to /api/vulns/information-leakage/execute with body: { payload: '{invalid json error stack trace', level: 'low' }. Sending a malformed structure causes the server to throw an unhandled exception and return a full stack trace in the response — include 'invalid', 'error', or 'stack' in your payload to simulate triggering an unhandled exception.",
+    expectedOutput: "{ success: true, message: 'Exploit successful! Here is your flag: flag{information-leakage_success}' }",
     mitigations: ["Use generic error handlers and suppress unhandled exceptions.","Strip server banners (e.g. Server: nginx/1.14.0)."],
     router: router
 };

@@ -47,6 +47,8 @@ module.exports = {
     theory: "Clickjacking occurs when an attacker uses transparent, unclickable iframes to overlay a legitimate website inside a malicious page, tricking users into clicking restricted elements.",
     exploit: "Inject an iframe snippet to encapsulate the target, altering z-index overlays.",
     hint: "Provide an iframe <iframe> tag with opacity to 0 pointing to the target.",
+    whatToSolve: "Send a POST request to /api/vulns/clickjacking/execute with body: { payload: \"<iframe src='https://target.com' style='opacity:0;position:absolute;top:0;left:0;width:100%;height:100%;'></iframe>\", level: 'low' }. The payload simulates an invisible iframe overlay that tricks users into clicking on a hidden target — the server detects the <iframe src= pattern and confirms the exploit.",
+    expectedOutput: "{ success: true, message: 'Exploit successful! Here is your flag: flag{clickjacking_success}' }",
     mitigations: ["Set X-Frame-Options to DENY or SAMEORIGIN.","Implement Content-Security-Policy (CSP) frame-ancestors."],
     router: router
 };

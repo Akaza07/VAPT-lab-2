@@ -47,6 +47,8 @@ module.exports = {
     theory: "SSRF occurs when an attacker forces the server to make a request to an internal or external resource on the attacker's behalf, bypassing firewalls.",
     exploit: "Supply a local IP address to an image fetcher or webhook service.",
     hint: "Send `http://169.254.169.254/latest/meta-data/` or `http://127.0.0.1`.",
+    whatToSolve: "Send a POST request to /api/vulns/ssrf/execute with body: { payload: 'http://127.0.0.1', level: 'low' }. The server makes an outbound HTTP request using your supplied URL without validation — pointing it to an internal IP (127.0.0.1 or 169.254.169.254) forces it to leak internal metadata.",
+    expectedOutput: "{ success: true, message: 'Exploit successful! Here is your flag: flag{ssrf_success}' }",
     mitigations: ["Whitelist allowed domains strictly.","Block resolution of internal IPs (10.x, 127.x, 169.254.x)."],
     router: router
 };

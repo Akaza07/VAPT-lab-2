@@ -47,6 +47,8 @@ module.exports = {
     theory: "Open Redirects occur when an application processes a user-supplied URL and redirects to it without validation, enabling highly effective phishing attacks.",
     exploit: "Provide an external URL in a 'next' or 'redirectTo' parameter.",
     hint: "Send `?next=http://evil.com`.",
+    whatToSolve: "Send a POST request to /api/vulns/open-redirects/execute with body: { payload: '?next=http://evil.com', level: 'low' }. The server reads the 'next' redirect parameter and forwards the user to it without validation — supplying an external URL like 'http://evil.com' or '//evil.com' causes the application to redirect victims off-site, enabling phishing.",
+    expectedOutput: "{ success: true, message: 'Exploit successful! Here is your flag: flag{open-redirects_success}' }",
     mitigations: ["Maintain a whitelist of safe, internal redirect paths.","Never blindly concatenate user input into the 'Location' header."],
     router: router
 };

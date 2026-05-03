@@ -47,6 +47,8 @@ module.exports = {
     theory: "CSRF tricks a victim's browser into executing an unwanted action on a trusted site by inheriting their active cookies and authentication state via forged backend requests.",
     exploit: "Provide an img src payload or form that forces a GET/POST state altering URL request.",
     hint: "Craft an HTML script that sends a hidden GET request to /transfer.",
+    whatToSolve: "Send a POST request to /api/vulns/cross-site-request-forgery/execute with body: { payload: '<form method=POST action=/transfer><input name=amount value=1000></form>', level: 'low' }. The payload simulates a forged cross-site form POST request to a state-changing endpoint — the server detects keywords like 'transfer', 'POST', or 'GET' to confirm the attack.",
+    expectedOutput: "{ success: true, message: 'Exploit successful! Here is your flag: flag{cross-site-request-forgery_success}' }",
     mitigations: ["Implement Synchronizer Token Patterns (Anti-CSRF tokens).","Set cookie SameSite attributes to Strict/Lax."],
     router: router
 };

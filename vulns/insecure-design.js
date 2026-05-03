@@ -47,6 +47,8 @@ module.exports = {
     theory: "Insecure design encompasses missing or ineffective control designs. It differs from implementation bugs; an insecure design is perfectly coded but strategically vulnerable (e.g., no rate limit on a free trial API).",
     exploit: "Abuse an inherently flawed business logic flow, such as applying a coupon code infinitely.",
     hint: "Submit 'COUPON100' multiple times in a single array payload.",
+    whatToSolve: "Send a POST request to /api/vulns/insecure-design/execute with body: { payload: 'COUPON100 multiple array apply apply apply', level: 'low' }. The business logic allows a coupon to be applied without checking if it was already used — submitting it multiple times in a single request (as an array) exploits this missing constraint.",
+    expectedOutput: "{ success: true, message: 'Exploit successful! Here is your flag: flag{insecure-design_success}' }",
     mitigations: ["Implement threat modeling during technical design.","Use secure design patterns and enforce business constraints at the database level."],
     router: router
 };

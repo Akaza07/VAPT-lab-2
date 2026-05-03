@@ -47,6 +47,8 @@ module.exports = {
     theory: "Insufficient logging allows attackers to achieve their goals repeatedly without detection. If logs are generated but never monitored, breaches can last months.",
     exploit: "Evade detection by injecting log-forging characters (like CRLF) so your attack doesn't trip alarms.",
     hint: "Inject a newline character `\\n` to push your payload off the primary log line.",
+    whatToSolve: "Send a POST request to /api/vulns/logging-monitoring/execute with body: { payload: 'normal-user-agent%0D%0AX-Injected: true', level: 'low' }. The server writes your input directly to logs without sanitizing carriage-return/newline (CRLF) characters — injecting '%0D%0A' (URL-encoded CRLF) or '\\n' splits the log line, hiding malicious activity from SIEM monitoring.",
+    expectedOutput: "{ success: true, message: 'Exploit successful! Here is your flag: flag{logging-monitoring_success}' }",
     mitigations: ["Log all authentication and high-value transactions.","Use a SIEM system to establish alerting for anomalies."],
     router: router
 };

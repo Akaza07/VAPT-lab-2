@@ -47,6 +47,8 @@ module.exports = {
     theory: "Mass Assignment (or Overposting) occurs when backend frameworks automatically bind client inputs to database objects without filtering out restricted variables (like `is_admin=true`).",
     exploit: "Add an extra parameter `is_admin: true` to a standard user profile update JSON.",
     hint: "Send `{ \"username\": \"hacker\", \"is_admin\": true }`.",
+    whatToSolve: "Send a POST request to /api/vulns/mass-assignment/execute with body: { payload: '{ \"username\": \"hacker\", \"is_admin\": true }', level: 'low' }. The framework blindly binds all incoming JSON keys to the database model — adding the hidden field 'is_admin: true' to a regular profile update silently escalates your own privileges to admin.",
+    expectedOutput: "{ success: true, message: 'Exploit successful! Here is your flag: flag{mass-assignment_success}' }",
     mitigations: ["Explicitly declare variable bindings (allow-listing).","Use Data Transfer Objects (DTOs) instead of raw DB entities."],
     router: router
 };

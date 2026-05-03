@@ -47,6 +47,8 @@ module.exports = {
     theory: "A Man-in-the-Middle (MITM) attack that intercepts HTTP requests before they're redirected to HTTPS and transparently serves standard HTTP, capturing all unencrypted subsequent data.",
     exploit: "Intercept the initial request and rewrite the `https://` response headers back to `http://`.",
     hint: "Submit 'Rewrite Location: http://'",
+    whatToSolve: "Send a POST request to /api/vulns/ssl-stripping/execute with body: { payload: 'Rewrite Location: http://victim.com strip SSL', level: 'low' }. As a man-in-the-middle, you intercept the server's HTTPS redirect response and rewrite the Location header from 'https://' to 'http://' — include 'strip', 'Rewrite', or 'http://' in your payload to simulate this downgrade.",
+    expectedOutput: "{ success: true, message: 'Exploit successful! Here is your flag: flag{ssl-stripping_success}' }",
     mitigations: ["Implement HSTS (HTTP Strict Transport Security).","Disallow initial HTTP access; hardcode HTTPS redirection."],
     router: router
 };

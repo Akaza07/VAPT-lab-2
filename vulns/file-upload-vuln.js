@@ -47,6 +47,8 @@ module.exports = {
     theory: "Unrestricted file uploads allow attackers to upload executable scripts (like PHP shells) instead of image files, granting Server-Side RCE.",
     exploit: "Submit a file named `shell.php` instead of `image.png`.",
     hint: "Upload a file with a .php extension containing a system command.",
+    whatToSolve: "Send a POST request to /api/vulns/file-upload-vuln/execute with body: { payload: 'shell.php', level: 'low' }. The server accepts your filename without validating its extension — uploading a file with a .php extension (or the word 'shell') allows the attacker to execute server-side code after upload.",
+    expectedOutput: "{ success: true, message: 'Exploit successful! Here is your flag: flag{file-upload-vuln_success}' }",
     mitigations: ["Validate content-types rigorously and rename uploads.","Store uploads outside the web root."],
     router: router
 };

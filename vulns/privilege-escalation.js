@@ -47,6 +47,8 @@ module.exports = {
     theory: "Attackers exploit a bug, design flaw, or configuration oversight to gain elevated access (Horizontal: acting as another user, Vertical: acting as an admin).",
     exploit: "Alter the JWT token or state cookie to elevate your privileges.",
     hint: "Send `{ role: 'admin' }` or manipulate the header.",
+    whatToSolve: "Send a POST request to /api/vulns/privilege-escalation/execute with body: { payload: '{ \"role\": \"admin\", \"user\": \"root\" }', level: 'low' }. The server trusts the role claim inside a JWT token or session cookie without server-side verification — replacing 'user' with 'admin', 'root', or 'system' grants elevated privileges.",
+    expectedOutput: "{ success: true, message: 'Exploit successful! Here is your flag: flag{privilege-escalation_success}' }",
     mitigations: ["Always verify server-side authorization controls.","Ensure cryptographically secure token signing."],
     router: router
 };

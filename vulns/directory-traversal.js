@@ -47,6 +47,8 @@ module.exports = {
     theory: "Directory (or Path) Traversal enables attackers to read arbitrary files on the system by manipulating URL path references usually with DOT-DOT-SLASH (../).",
     exploit: "Use `../` characters iteratively to reach the root system config.",
     hint: "Navigate back from /var/www/html/ using ../../../../etc/passwd",
+    whatToSolve: "Send a POST request to /api/vulns/directory-traversal/execute with body: { payload: '../../../../etc/passwd', level: 'low' }. The server passes your input directly into a file path without sanitizing '../' sequences — chaining enough '../' segments lets you break out of the web root and read sensitive system files.",
+    expectedOutput: "{ success: true, message: 'Exploit successful! Here is your flag: flag{directory-traversal_success}' }",
     mitigations: ["Use resolve() strictly verifying the base directory.","Strip ../ entirely from incoming params."],
     router: router
 };

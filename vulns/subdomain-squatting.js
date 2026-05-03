@@ -47,6 +47,8 @@ module.exports = {
     theory: "Also called dangling DNS, occurs when a subdomain points to a deprovisioned cloud resource (like an S3 bucket). Attackers claim the resource using the same name to impersonate the subdomain.",
     exploit: "Register the exact Azure/AWS resource name that the DNS still points to.",
     hint: "Send `Register: abandoned-bucket.s3.amazonaws.com`.",
+    whatToSolve: "Send a POST request to /api/vulns/subdomain-squatting/execute with body: { payload: 'Register: abandoned-bucket.s3.amazonaws.com Claim', level: 'low' }. A subdomain (e.g. staging.company.com) still has a CNAME record pointing to a deleted cloud resource — by claiming/registering that resource name on AWS/Azure with the same name, you take over the subdomain. Include 'abandoned', 'Claim', or 'Register' in your payload.",
+    expectedOutput: "{ success: true, message: 'Exploit successful! Here is your flag: flag{subdomain-squatting_success}' }",
     mitigations: ["Regularly audit and prune DNS records for non-existent environments.","Implement defensive resource claiming."],
     router: router
 };

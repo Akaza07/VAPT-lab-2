@@ -47,6 +47,8 @@ module.exports = {
     theory: "DNS cache poisoning introduces fraudulent IP addresses into the DNS resolvers cache, routing traffic towards a server controlled by attackers instead of the main host.",
     exploit: "Simulate a fake DNS UDP resolution record payload overriding the mapping.",
     hint: "Submit a mapping payload pointing domain.com to an attacker IP.",
+    whatToSolve: "Send a POST request to /api/vulns/dns-poisoning/execute with body: { payload: 'domain.com IN A spoof DNS 1.3.3.7', level: 'low' }. The payload simulates injecting a fraudulent DNS record — including 'IN A', 'spoof', or 'DNS' in your payload mimics a poisoned DNS response that redirects legitimate traffic to an attacker-controlled IP.",
+    expectedOutput: "{ success: true, message: 'Exploit successful! Here is your flag: flag{dns-poisoning_success}' }",
     mitigations: ["Use DNSSEC.","Ensure random packet transaction IDs."],
     router: router
 };

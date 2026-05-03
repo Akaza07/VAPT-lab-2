@@ -47,6 +47,8 @@ module.exports = {
     theory: "Email spoofing involves forging the sender address so that the message appears to originate from a legitimate source, bypassing basic trust checks.",
     exploit: "Modify the SMTP header `From:` to match the target's internal domain exactly.",
     hint: "Inject `From: admin@yourcompany.com`.",
+    whatToSolve: "Send a POST request to /api/vulns/email-spoofing/execute with body: { payload: 'From: admin@company.com\\nSubject: Urgent Security Alert', level: 'low' }. Forging the SMTP 'From:' header to use an admin/trusted address tricks recipients into trusting the email — the server detects the 'From:.*admin' pattern to confirm the spoof.",
+    expectedOutput: "{ success: true, message: 'Exploit successful! Here is your flag: flag{email-spoofing_success}' }",
     mitigations: ["Implement strict DMARC, DKIM, and SPF validation.","Flag external emails visually."],
     router: router
 };

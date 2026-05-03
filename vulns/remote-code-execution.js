@@ -47,6 +47,8 @@ module.exports = {
     theory: "RCE allows an attacker to execute arbitrary malicious code on the backend server, typically leading to a complete system compromise.",
     exploit: "Execute a serialized object or eval manipulation.",
     hint: "Send an `eval('whoami')` or OS command payload.",
+    whatToSolve: "Send a POST request to /api/vulns/remote-code-execution/execute with body: { payload: \"eval('whoami')\", level: 'low' }. The server passes your input to a dynamic code execution function like `eval()` or `exec()` without sanitization — submitting 'eval', 'whoami', or 'exec' simulates arbitrary code execution on the remote server.",
+    expectedOutput: "{ success: true, message: 'Exploit successful! Here is your flag: flag{remote-code-execution_success}' }",
     mitigations: ["Avoid dynamic code execution (eval, exec).","Use secure serialization handling avoiding complex object reinstantiation."],
     router: router
 };

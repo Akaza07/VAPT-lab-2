@@ -47,6 +47,8 @@ module.exports = {
     theory: "Prototype pollution is a JavaScript vulnerability where attackers inject properties into `Object.prototype`, tampering with application logic across the entire process.",
     exploit: "Send a JSON payload containing `__proto__` to overwrite object defaults.",
     hint: "Submit `{\"__proto__\": {\"isAdmin\": true}}`.",
+    whatToSolve: "Send a POST request to /api/vulns/prototype-pollution/execute with body: { payload: '{\"__proto__\": {\"isAdmin\": true}}', level: 'low' }. JavaScript's prototype chain means that properties set on `__proto__` propagate to all objects — injecting '__proto__' or 'prototype' into a deep-merge function overwrites the global object template, causing isAdmin to be true everywhere.",
+    expectedOutput: "{ success: true, message: 'Exploit successful! Here is your flag: flag{prototype-pollution_success}' }",
     mitigations: ["Use `Object.create(null)` for dictionary objects.","Freeze the Object prototype using `Object.freeze()`, or validate recursive merges."],
     router: router
 };

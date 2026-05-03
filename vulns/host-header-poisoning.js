@@ -47,6 +47,8 @@ module.exports = {
     theory: "If a system uses the incoming HTTP Host header to construct links or evaluate logic, attackers can inject arbitrary domains leading to cache poisoning or password reset hijacking.",
     exploit: "Change the Host header in the request to an attacker-controlled domain.",
     hint: "Send `Host: evil.com` in your request.",
+    whatToSolve: "Send a POST request to /api/vulns/host-header-poisoning/execute with body: { payload: 'Host: evil.com', level: 'low' }. The server blindly trusts the incoming Host header to construct password-reset links or cache responses — injecting 'evil.com' causes those generated links to point to the attacker's domain.",
+    expectedOutput: "{ success: true, message: 'Exploit successful! Here is your flag: flag{host-header-poisoning_success}' }",
     mitigations: ["Never trust the Host header; use absolute URLs from environment configs.","Whitelist accepted Host headers via the web server."],
     router: router
 };

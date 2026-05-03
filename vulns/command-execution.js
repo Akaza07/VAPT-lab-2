@@ -47,6 +47,8 @@ module.exports = {
     theory: "Command Execution happens when arbitrary operating system commands are interpreted by the host server, usually passed transparently through a vulnerable shell exec.",
     exploit: "Inject a bash concatenation character like `;` or `&&` into the payload followed by `cat /etc/passwd`.",
     hint: "Try using the semicolon delimiter to stack commands.",
+    whatToSolve: "Send a POST request to /api/vulns/command-execution/execute with body: { payload: 'ping 127.0.0.1; cat /etc/passwd', level: 'low' }. The semicolon (;) is a shell command separator — the server appends your input directly to a shell exec call, allowing you to inject and run a second OS command.",
+    expectedOutput: "{ success: true, message: 'Exploit successful! Here is your flag: flag{command-execution_success}' }",
     mitigations: ["Avoid direct execution of OS commands.","Use strong input sanitization and parameterized shell components."],
     router: router
 };

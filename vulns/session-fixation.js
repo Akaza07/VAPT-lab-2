@@ -47,6 +47,8 @@ module.exports = {
     theory: "Session Fixation allows an attacker to hijack a user session by providing them with a known identifier before they authenticate, causing the server to log the victim in using the attacker's id.",
     exploit: "Provide a static session ID URL to force authentication via GET parameters.",
     hint: "Send `?PHPSESSID=1234` simulating the forced entry.",
+    whatToSolve: "Send a POST request to /api/vulns/session-fixation/execute with body: { payload: '?PHPSESSID=attacker-controlled-session', level: 'low' }. Before the victim logs in, the attacker pre-sets a known session ID via a URL parameter — the server never regenerates it after login, so the attacker with the same ID gains authenticated access. Include 'PHPSESSID=' or 'session_id=' in your payload.",
+    expectedOutput: "{ success: true, message: 'Exploit successful! Here is your flag: flag{session-fixation_success}' }",
     mitigations: ["Always generate a completely new Session ID upon successful login.","Do not accept session IDs in the URL."],
     router: router
 };

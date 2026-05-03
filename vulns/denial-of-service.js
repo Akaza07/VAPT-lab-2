@@ -47,6 +47,8 @@ module.exports = {
     theory: "DoS prevents legitimate users from accessing services by flooding resources, CPU overhead, or causing software panics in applications leading to unresponsive states.",
     exploit: "Initiate thousands of requests via an infinite loop or excessive recursive JSON.",
     hint: "Send an extremely nested JSON payload to lock up parsing logic.",
+    whatToSolve: "Send a POST request to /api/vulns/denial-of-service/execute with body: { payload: 'dos flood attack {{{nested}}}', level: 'low' }. The server simulates being overwhelmed by a deeply-nested JSON structure or a flood attack — include 'dos', 'flood', or deeply nested braces like '{{{' in your payload to trigger it.",
+    expectedOutput: "{ success: true, message: 'Exploit successful! Here is your flag: flag{denial-of-service_success}' }",
     mitigations: ["Apply Rate Limiting and WAFs.","Restrict request body payload chunk dimensions."],
     router: router
 };

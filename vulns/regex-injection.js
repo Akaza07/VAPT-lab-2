@@ -47,6 +47,8 @@ module.exports = {
     theory: "Regular Expression Denial of Service (ReDoS) or Injection happens when an attacker controls a regex pattern or string evaluated by an inefficient regex, heavily spiking CPU usage.",
     exploit: "Provide a string that causes catastrophic backtracking.",
     hint: "Submit an evil string like `aaaaaaaaaaaaaaaaaaaaaaaaaaaa!` to a regex evaluating `(a+)+$`.",
+    whatToSolve: "Send a POST request to /api/vulns/regex-injection/execute with body: { payload: 'aaaaaaaaaaaaaaa! catastrophic a{100}', level: 'low' }. The server evaluates an inefficient regex like `(a+)+$` against your input — a long string of 'a's followed by '!' causes exponential backtracking, spiking CPU. Include 'catastrophic', 'a{N}', or 'a!' in the payload to trigger it.",
+    expectedOutput: "{ success: true, message: 'Exploit successful! Here is your flag: flag{regex-injection_success}' }",
     mitigations: ["Do not allow users to specify Regex execution directly.","Use non-backtracking regex engines where possible."],
     router: router
 };
